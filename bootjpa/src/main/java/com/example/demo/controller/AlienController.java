@@ -27,8 +27,25 @@ public class AlienController {
 //        return "home.jsp";
 //    }
 
+    @DeleteMapping("/alien/{aid}")
+    public String deleteAlien(@PathVariable int aid)
+    {
+        Alien a = repo.getById(aid);
+
+        repo.delete(a);
+
+        return "deleted";
+    }
+
     @PostMapping(path = "/alien", consumes = {"application/json"})
     public Alien addAlien(@RequestBody Alien alien)
+    {
+        repo.save(alien);
+        return alien;
+    }
+
+    @PutMapping(path = "/alien", consumes = {"application/json"})
+    public Alien saveOrUpdate(@RequestBody Alien alien)
     {
         repo.save(alien);
         return alien;

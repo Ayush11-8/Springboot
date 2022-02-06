@@ -4,14 +4,12 @@ import com.example.demo.dao.AlienRepo;
 import com.example.demo.model.Alien;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
 public class AlienController {
 
     @Autowired
@@ -22,15 +20,21 @@ public class AlienController {
         return "home.jsp";
     }
 
-    @RequestMapping("/addAlien")
-    public String addAlien(Alien alien)
+//    @RequestMapping("/addAlien")
+//    public String addAlien(Alien alien)
+//    {
+//        repo.save(alien);
+//        return "home.jsp";
+//    }
+
+    @PostMapping(path = "/alien", consumes = {"application/json"})
+    public Alien addAlien(@RequestBody Alien alien)
     {
         repo.save(alien);
-        return "home.jsp";
+        return alien;
     }
 
-    @RequestMapping(path="/aliens", produces={"application/xml"})
-    @ResponseBody
+    @GetMapping(path="/aliens")
     public List<Alien> getAliens()
     {
 
@@ -39,7 +43,6 @@ public class AlienController {
     }
 
     @RequestMapping("/alien/{aid}")
-    @ResponseBody
     public Optional<Alien> getAlien(@PathVariable("aid") int aid)
     {
         return repo.findById(aid);

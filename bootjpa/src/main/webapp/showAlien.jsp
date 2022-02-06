@@ -9,10 +9,7 @@
     </head>
     <body>
 
-        <form action="getAlien">
-            <input type="text" name="aid"><br>
-            <input type="submit"<br>
-        </form>
+        ${alien}
 
     </body>
 </html>

@@ -2,11 +2,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>
         Java Springboot
         </title>
     </head>
     <body>
-
+        Welcome ${name}
     </body>
 </html>

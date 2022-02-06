@@ -1,0 +1,1 @@
+insert into alien(aid,aname) values(101,'Ayush');

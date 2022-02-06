@@ -4,8 +4,10 @@ import com.example.demo.dao.AlienRepo;
 import com.example.demo.model.Alien;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -25,17 +27,20 @@ public class AlienController {
         repo.save(alien);
         return "home.jsp";
     }
-    @RequestMapping("/getAlien")
-    public ModelAndView getAlien(@RequestParam int aid)
+
+    @RequestMapping("/aliens")
+    @ResponseBody
+    public String getAliens()
     {
-        ModelAndView mv = new ModelAndView("showAlien.jsp");
-        Alien alien = repo.findById(aid).orElse(new Alien());
 
-        System.out.println(repo.findByTech("C++"));
-        System.out.println(repo.findByAidLessThan(102));
-        System.out.println(repo.findByTechSorted("C++"));
+          return repo.findAll().toString();
 
-        mv.addObject(alien);
-        return mv;
+    }
+
+    @RequestMapping("/alien/{aid}")
+    @ResponseBody
+    public String getAlien(@PathVariable("aid") int aid)
+    {
+        return repo.findById(aid).toString();
     }
 }

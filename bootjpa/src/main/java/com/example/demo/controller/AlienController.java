@@ -29,7 +29,7 @@ public class AlienController {
         return "home.jsp";
     }
 
-    @RequestMapping("/aliens")
+    @RequestMapping(path="/aliens", produces={"application/xml"})
     @ResponseBody
     public List<Alien> getAliens()
     {
